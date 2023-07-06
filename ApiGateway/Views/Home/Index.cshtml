@@ -1,25 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    string exchange = "";
+    string routingKey = "";
+    string responseQueue = "";
+    if (ViewBag.SeriveName == "Jamshid Service")
+    {
+        exchange = "Jamshid-Exchange";
+        routingKey = "secretKey";
+        responseQueue = "Jamshid-Queue-Receive";
+    }
 }
 <div class="text-center">
     <h1 class="display-4">Welcome @ViewBag.SeriveName</h1>
 </div>
 @if (!string.IsNullOrEmpty(@ViewBag.SeriveName))
 {
+    
     <div class="container">
         <h2>AMQP Message Sender</h2>
         <form id="amqpForm" method="post" asp-action="SendRabbit">
             <div class="form-group">
                 <label for="Exchange">Exchange:</label>
-                <input type="text" class="form-control" id="exchange" name="Exchange" required>
+                <input type="text" class="form-control" id="exchange" value="@exchange" name="Exchange" required>
             </div>
             <div class="form-group">
                 <label for="RoutingKey">Routing Key:</label>
-                <input type="text" class="form-control" id="routingKey" name="RoutingKey" required>
+                <input type="text" class="form-control" id="routingKey" value="@routingKey" name="RoutingKey" required>
             </div>
             <div class="form-group">
                 <label for="ResponseQueue">ResponseQueue:</label>
-                <input type="text" class="form-control" id="ResponseQueue" name="ResponseQueue" required>
+                <input type="text" class="form-control" id="ResponseQueue" value="@responseQueue" name="ResponseQueue" required>
             </div>
             <div class="form-group">
                 <label for="Message">Message:</label>

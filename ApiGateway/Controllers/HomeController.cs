@@ -36,6 +36,7 @@ namespace ApiGateway.Controllers
         {
             string result = _rabbitMqService.GetMessage(ResponseQueue).Result?.Message??"no response!";
             ViewBag.Response=result;
+           
             return View("Index");//, new { serviceName = HttpContext.Request.Query["serviceName"] });
         }
 
