@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome @ViewBag.SeriveName</h1>
+</div>
+@if (!string.IsNullOrEmpty(@ViewBag.SeriveName))
+{
+    <div class="container">
+        <h2>AMQP Message Sender</h2>
+        <form id="amqpForm" method="post" asp-action="SendRabbit">
+            <div class="form-group">
+                <label for="Exchange">Exchange:</label>
+                <input type="text" class="form-control" id="exchange" name="Exchange" required>
+            </div>
+            <div class="form-group">
+                <label for="RoutingKey">Routing Key:</label>
+                <input type="text" class="form-control" id="routingKey" name="RoutingKey" required>
+            </div>
+            <div class="form-group">
+                <label for="ResponseQueue">ResponseQueue:</label>
+                <input type="text" class="form-control" id="ResponseQueue" name="ResponseQueue" required>
+            </div>
+            <div class="form-group">
+                <label for="Message">Message:</label>
+                <textarea class="form-control" id="message" name="Message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+
+    @* @section Scripts
+    {
+        <script>
+            // Add JavaScript logic here for handling form submission and sending the message via AMQP
+            $(document).ready(function () {
+                $("#amqpForm").submit(function (event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+
+                    // Perform your AMQP message sending logic here using the form data
+                    // Example code:
+                    $.ajax({
+                        type: "POST",
+                        url: "/send-amqp-message",
+                        data: formData,
+                        success: function (response) {
+                            alert("Message sent successfully!");
+                        },
+                        error: function () {
+                            alert("Failed to send message. Please try again.");
+                        }
+                    });
+                });
+            });
+        </script>
+    }*@
+}
+<br />
+@if (!string.IsNullOrEmpty(@ViewBag.Response))
+{
+    <p><h3>@ViewBag.Response</h3></p>
+}
